@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IPL Match Tickets</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV BAR (Flexbox) -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main navigation">
+      <a href="#top" class="logo">IPL<span>Tickets</span></a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#guidelines">Guidelines</a></li>
+        <li><a href="#booking">Book</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- MATCH SCHEDULE (CSS Grid cards) -->
+    <section id="schedule" class="section">
+      <h2>Match schedule</h2>
+
+      <div class="toolbar">
+        <div class="field">
+          <label for="teamFilter">Filter by team</label>
+          <select id="teamFilter">
+            <option value="all">All teams</option>
+            <option value="MI">Mumbai Indians</option>
+            <option value="CSK">Chennai Super Kings</option>
+            <option value="RCB">Royal Challengers Bengaluru</option>
+            <option value="KKR">Kolkata Knight Riders</option>
+            <option value="DC">Delhi Capitals</option>
+            <option value="SRH">Sunrisers Hyderabad</option>
+          </select>
+        </div>
+        <div class="view-toggle" role="group" aria-label="Layout view">
+          <button type="button" id="gridBtn" class="active" aria-pressed="true">Grid</button>
+          <button type="button" id="listBtn" aria-pressed="false">List</button>
+        </div>
+      </div>
+
+      <div id="matchContainer" class="match-grid">
+        <article class="match-card" data-teams="MI CSK">
+          <h3>MI vs CSK</h3>
+          <p class="meta">Wankhede Stadium, Mumbai</p>
+          <p>Sat, 4 Apr · 7:30 PM</p>
+        </article>
+        <article class="match-card" data-teams="RCB KKR">
+          <h3>RCB vs KKR</h3>
+          <p class="meta">M. Chinnaswamy Stadium, Bengaluru</p>
+          <p>Sun, 5 Apr · 3:30 PM</p>
+        </article>
+        <article class="match-card" data-teams="DC SRH">
+          <h3>DC vs SRH</h3>
+          <p class="meta">Arun Jaitley Stadium, Delhi</p>
+          <p>Mon, 6 Apr · 7:30 PM</p>
+        </article>
+        <article class="match-card" data-teams="CSK RCB">
+          <h3>CSK vs RCB</h3>
+          <p class="meta">MA Chidambaram Stadium, Chennai</p>
+          <p>Wed, 8 Apr · 7:30 PM</p>
+        </article>
+        <article class="match-card" data-teams="KKR MI">
+          <h3>KKR vs MI</h3>
+          <p class="meta">Eden Gardens, Kolkata</p>
+          <p>Fri, 10 Apr · 7:30 PM</p>
+        </article>
+        <article class="match-card" data-teams="SRH DC">
+          <h3>SRH vs DC</h3>
+          <p class="meta">Rajiv Gandhi Stadium, Hyderabad</p>
+          <p>Sat, 11 Apr · 3:30 PM</p>
+        </article>
+      </div>
+      <p id="emptyMsg" class="empty" hidden>No matches for this team. Pick another team or choose All teams.</p>
+    </section>
+
+    <!-- GUIDELINES (3-column CSS Grid) -->
+    <section id="guidelines" class="section">
+      <h2>Stadium guidelines</h2>
+      <div class="guidelines-grid">
+        <div class="guide">
+          <h3>Entry</h3>
+          <p>Gates open two hours before the first ball. Carry your e-ticket and a valid photo ID.</p>
+        </div>
+        <div class="guide">
+          <h3>Allowed items</h3>
+          <p>Small bags, sealed water bottles and team merchandise are fine. Outside food is not.</p>
+        </div>
+        <div class="guide">
+          <h3>Safety</h3>
+          <p>Follow stewards' instructions, keep aisles clear and note your nearest exit on arrival.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKING (from Activity 7) -->
+    <section id="booking" class="section">
+      <h2>Book tickets</h2>
+      <div class="booking-layout">
+        <form id="bookingForm" class="card" onsubmit="return false">
+          <label for="match">Match</label>
+          <select id="match">
+            <option value="">Select a match</option>
+            <option value="MI vs CSK" data-base="1000">MI vs CSK</option>
+            <option value="RCB vs KKR" data-base="800">RCB vs KKR</option>
+            <option value="DC vs SRH" data-base="700">DC vs SRH</option>
+            <option value="CSK vs RCB" data-base="1500">CSK vs RCB</option>
+            <option value="KKR vs MI" data-base="900">KKR vs MI</option>
+            <option value="SRH vs DC" data-base="700">SRH vs DC</option>
+          </select>
+
+          <label for="stand">Stand category</label>
+          <select id="stand">
+            <option value="">Select a stand</option>
+            <option value="General" data-multiplier="1">General (x1)</option>
+            <option value="Premium" data-multiplier="1.5">Premium (x1.5)</option>
+            <option value="VIP" data-multiplier="2.5">VIP (x2.5)</option>
+          </select>
+
+          <label for="quantity">Tickets</label>
+          <input type="number" id="quantity" min="1" max="10" value="1">
+        </form>
+
+        <div class="card" aria-live="polite">
+          <h3>Booking summary</h3>
+          <dl>
+            <div class="row"><dt>Match</dt><dd id="sumMatch">Not selected</dd></div>
+            <div class="row"><dt>Stand</dt><dd id="sumStand">Not selected</dd></div>
+            <div class="row"><dt>Price per ticket</dt><dd id="sumPrice">₹0</dd></div>
+            <div class="row"><dt>Tickets</dt><dd id="sumQty">1</dd></div>
+          </dl>
+          <p class="total"><span>Total</span><span id="sumTotal">₹0</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">IPL Tickets · Student project</footer>
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

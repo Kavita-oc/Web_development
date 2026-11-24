@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Tickets | IPL Ticket Booking</title>
+</head>
+<body>
+
+  <a href="index.html">Back to Home</a>
+
+  <h1>IPL Ticket Booking</h1>
+
+  <form action="#" method="get">
+
+    <p>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required minlength="3" maxlength="50">
+    </p>
+
+    <p>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </p>
+
+    <p>
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" required minlength="10" maxlength="10" pattern="[0-9]{10}" title="Enter a 10-digit phone number">
+    </p>
+
+    <p>
+      <label for="match">Match:</label>
+      <select id="match" name="match" required>
+        <option value="">Select a match</option>
+        <option value="rcb-csk">RCB vs CSK</option>
+        <option value="mi-kkr">MI vs KKR</option>
+        <option value="csk-srh">CSK vs SRH</option>
+        <option value="dc-rr">DC vs RR</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="stand">Stand Category:</label>
+      <select id="stand" name="stand" required>
+        <option value="">Select a stand</option>
+        <option value="general">General</option>
+        <option value="upper">Upper Tier</option>
+        <option value="lower">Lower Tier</option>
+        <option value="premium">Premium</option>
+      </select>
+    </p>
+
+    <p>
+      <label for="tickets">Number of Tickets (1-10):</label>
+      <input type="number" id="tickets" name="tickets" required min="1" max="10">
+    </p>
+
+    <p>
+      Ticket Delivery:
+      <input type="radio" id="eticket" name="delivery" value="e-ticket" required>
+      <label for="eticket">E-ticket</label>
+      <input type="radio" id="pickup" name="delivery" value="pickup">
+      <label for="pickup">Box Office Pickup</label>
+    </p>
+
+    <p>
+      Add-ons:
+      <input type="checkbox" id="parking" name="addons" value="parking">
+      <label for="parking">Parking</label>
+      <input type="checkbox" id="meal" name="addons" value="meal">
+      <label for="meal">Meal Combo</label>
+    </p>
+
+    <p>
+      <input type="submit" value="Submit">
+      <input type="reset" value="Reset">
+    </p>
+
+  </form>
+
+</body>
+</html>

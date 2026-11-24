@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Match Ticket Booking</title>
+  <style>
+    :root {
+      --pitch: #14532d;
+      --chalk: #f7f8f5;
+      --ink: #1c2420;
+      --line: #d5dbd2;
+      --gold: #e0a800;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--chalk); color: var(--ink); line-height: 1.5;
+    }
+    header { background: var(--pitch); color: #fff; padding: 1.5rem 1rem; text-align: center; }
+    header h1 { margin: 0; font-size: 1.6rem; }
+    main {
+      max-width: 920px; margin: 2rem auto; padding: 0 1rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+    }
+    @media (max-width: 720px) { main { grid-template-columns: 1fr; } }
+    section { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 1.5rem; }
+    h2 { margin-top: 0; font-size: 1.2rem; }
+    label { display: block; font-weight: 600; margin: 1rem 0 .3rem; }
+    select, input[type="number"] {
+      width: 100%; padding: .6rem; font-size: 1rem;
+      border: 1px solid var(--line); border-radius: 6px; background: #fff;
+    }
+    select:focus, input:focus { outline: 3px solid var(--gold); outline-offset: 1px; }
+    dl { margin: 0; }
+    .row { display: flex; justify-content: space-between; padding: .6rem 0; border-bottom: 1px dashed var(--line); }
+    .row dt { color: #5a655e; }
+    .row dd { margin: 0; font-weight: 600; text-align: right; }
+    .total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 1rem; font-size: 1.3rem; font-weight: 700; }
+    .total span:last-child { color: var(--pitch); }
+    .toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 20px);
+      background: var(--ink); color: #fff; padding: .75rem 1.25rem; border-radius: 8px;
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    @media (prefers-reduced-motion: reduce) { .toast { transition: none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Book your match tickets</h1>
+  </header>
+
+  <main>
+    <!-- Booking form -->
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Booking details</h2>
+      <form id="bookingForm" onsubmit="return false">
+        <label for="match">Match</label>
+        <select id="match" name="match">
+          <option value="">-- Select a match --</option>
+          <option value="India vs Australia" data-base="1000">India vs Australia</option>
+          <option value="India vs England" data-base="800">India vs England</option>
+          <option value="India vs Pakistan" data-base="1500">India vs Pakistan</option>
+        </select>
+
+        <label for="stand">Stand category</label>
+        <select id="stand" name="stand">
+          <option value="">-- Select a stand --</option>
+          <option value="General" data-multiplier="1">General (x1)</option>
+          <option value="Premium" data-multiplier="1.5">Premium (x1.5)</option>
+          <option value="VIP" data-multiplier="2.5">VIP (x2.5)</option>
+        </select>
+
+        <label for="quantity">Tickets</label>
+        <input type="number" id="quantity" name="quantity" min="1" max="10" value="1">
+      </form>
+    </section>
+
+    <!-- Booking Summary Card -->
+    <section aria-labelledby="summary-title" id="summaryCard" aria-live="polite">
+      <h2 id="summary-title">Booking summary</h2>
+      <dl>
+        <div class="row"><dt>Match</dt><dd id="sumMatch">Not selected</dd></div>
+        <div class="row"><dt>Stand</dt><dd id="sumStand">Not selected</dd></div>
+        <div class="row"><dt>Price per ticket</dt><dd id="sumPrice">₹0</dd></div>
+        <div class="row"><dt>Tickets</dt><dd id="sumQty">1</dd></div>
+      </dl>
+      <div class="total"><span>Total</span><span id="sumTotal">₹0</span></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

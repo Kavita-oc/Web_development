@@ -1,0 +1,107 @@
+:root {
+  --navy: #0f2a4a;
+  --blue: #1f5fbf;
+  --gold: #f2b01e;
+  --bg: #f4f6fa;
+  --ink: #17202c;
+  --muted: #5b6676;
+  --line: #d9dfe8;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- NAV (Flexbox) ---------- */
+.site-header { background: var(--navy); color: #fff; position: sticky; top: 0; z-index: 10; }
+.navbar { max-width: 1100px; margin: 0 auto; padding: .9rem 1rem; display: flex; justify-content: space-between; align-items: center; }
+.logo { font-size: 1.4rem; font-weight: 800; }
+.logo span { color: var(--gold); margin-left: .25rem; font-weight: 600; }
+.nav-links { list-style: none; margin: 0; padding: 0; display: flex; gap: 1.75rem; }
+.nav-links a { padding: .4rem 0; border-bottom: 2px solid transparent; }
+.nav-links a:hover, .nav-links a:focus-visible { border-color: var(--gold); outline: none; }
+
+.hamburger { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; flex-direction: column; gap: 5px; }
+.hamburger span { display: block; width: 24px; height: 3px; background: #fff; border-radius: 2px; transition: transform .25s, opacity .25s; }
+.hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+/* ---------- Sections ---------- */
+.section { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+.section h2 { margin: 0 0 1rem; font-size: 1.6rem; color: var(--navy); }
+
+/* ---------- Toolbar ---------- */
+.toolbar { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem; }
+.field label, .card label { display: block; font-weight: 600; margin-bottom: .3rem; }
+select, input[type="number"] { width: 100%; min-width: 220px; padding: .6rem; font-size: 1rem; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+.card label { margin-top: 1rem; }
+.card label:first-child { margin-top: 0; }
+select:focus, input:focus, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.view-toggle { display: flex; }
+.view-toggle button { padding: .6rem 1.2rem; font-size: 1rem; border: 1px solid var(--blue); background: #fff; color: var(--blue); cursor: pointer; }
+.view-toggle button:first-child { border-radius: 6px 0 0 6px; }
+.view-toggle button:last-child { border-radius: 0 6px 6px 0; border-left: 0; }
+.view-toggle button.active { background: var(--blue); color: #fff; }
+
+/* ---------- Match cards (CSS Grid) ---------- */
+.match-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.match-card { background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--gold); border-radius: 8px; padding: 1.1rem 1.25rem; }
+.match-card h3 { margin: 0 0 .3rem; color: var(--navy); }
+.match-card p { margin: .15rem 0; }
+.match-card .meta { color: var(--muted); }
+.match-card[hidden] { display: none; }
+.empty { padding: 1rem; background: #fff; border: 1px dashed var(--line); border-radius: 8px; }
+
+/* List view: one card per row, details side by side */
+.match-grid.list-view { grid-template-columns: 1fr; gap: .75rem; }
+.match-grid.list-view .match-card { display: flex; justify-content: space-between; align-items: center; gap: 1rem; border-top: 1px solid var(--line); border-left: 4px solid var(--gold); }
+.match-grid.list-view .match-card h3 { margin: 0; min-width: 120px; }
+.match-grid.list-view .match-card p { margin: 0; }
+
+/* ---------- Guidelines (3-column Grid) ---------- */
+.guidelines-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.guide { background: var(--navy); color: #fff; border-radius: 8px; padding: 1.25rem; }
+.guide h3 { margin: 0 0 .4rem; color: var(--gold); }
+.guide p { margin: 0; }
+
+/* ---------- Booking ---------- */
+.booking-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 1.25rem; }
+.card h3 { margin-top: 0; }
+dl { margin: 0; }
+.row { display: flex; justify-content: space-between; padding: .55rem 0; border-bottom: 1px dashed var(--line); }
+.row dt { color: var(--muted); }
+.row dd { margin: 0; font-weight: 600; text-align: right; }
+.total { display: flex; justify-content: space-between; margin: 1rem 0 0; font-size: 1.3rem; font-weight: 700; }
+.total span:last-child { color: var(--blue); }
+
+.site-footer { text-align: center; padding: 1.5rem; color: var(--muted); }
+.toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translate(-50%, 20px); background: var(--ink); color: #fff; padding: .75rem 1.25rem; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 20; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Tablet: stack into one column ---------- */
+@media (max-width: 900px) {
+  .match-grid,
+  .guidelines-grid,
+  .booking-layout { grid-template-columns: 1fr; }
+}
+
+/* ---------- Phone: hamburger menu ---------- */
+@media (max-width: 768px) {
+  .hamburger { display: flex; }
+  .navbar { flex-wrap: wrap; }
+  .nav-links { display: none; width: 100%; flex-direction: column; gap: 0; padding-top: .5rem; }
+  .nav-links.open { display: flex; }
+  .nav-links li { border-top: 1px solid rgba(255,255,255,.15); }
+  .nav-links a { display: block; padding: .8rem 0; border-bottom: 0; }
+  .toolbar { flex-direction: column; align-items: stretch; }
+  select, input[type="number"] { min-width: 0; }
+  .view-toggle button { flex: 1; }
+  .match-grid.list-view .match-card { flex-direction: column; align-items: flex-start; gap: .25rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hamburger span, .toast { transition: none; }
+}
